@@ -36,7 +36,6 @@
 			</div>
 		</nav>	
 	</header>
-	  <h1>Hello</h1>
   
 
 </main>

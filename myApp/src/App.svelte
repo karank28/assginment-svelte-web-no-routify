@@ -35,9 +35,6 @@ import Home from "./components/Home.svelte";
 					<li>
 						<a href="#" class="block py-2 pl-3 pr-4 md:p-0">Admin</a>
 					</li>
-					<li>
-						<a href="#" class="block py-2 pl-3 pr-4 md:p-0">Admin2</a>
-					</li>
 				</ul>
 			</div>
 		</div>

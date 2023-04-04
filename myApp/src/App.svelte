@@ -71,20 +71,20 @@
 	  
 	  <div class="w-full block lg:text-center flex-grow lg:flex lg:items-center lg:w-auto p-0" id="Menu">
 		
-		<div class="flex-auto p-0 cursor-pointer hover:shadow-lg">
-			<div on:click = { () => switchPage('Home') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 hover:bg-amber-400 hover:text-black hover:-translate-y-1 hover:scale-110 max-lg:ml-5 max-lg:hover:-translate-x-4 max-lg:hover:scale-100">{_home}</div>
+		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
+			<div on:click = { () => switchPage('Home') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_home}</div>
 		</div>
-		<div class="flex-auto p-0 cursor-pointer hover:shadow-lg">
-			<div on:click = { () => switchPage('Products') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 hover:bg-amber-400 hover:text-black hover:-translate-y-1 hover:scale-110 max-lg:ml-5 max-lg:hover:-translate-x-4 max-lg:hover:scale-100">{_products}</div>
+		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
+			<div on:click = { () => switchPage('Products') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_products}</div>
 		</div>
-		<div class="flex-auto p-0 cursor-pointer hover:shadow-lg">
-			<div on:click = { () => switchPage('About') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 hover:bg-amber-400 hover:text-black hover:-translate-y-1 hover:scale-110 max-lg:ml-5 max-lg:hover:-translate-x-4 max-lg:hover:scale-100">{_aboutUs}</div>
+		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
+			<div on:click = { () => switchPage('About') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_aboutUs}</div>
 		</div>
-		<div class="flex-auto p-0 cursor-pointer hover:shadow-lg">
-			<div on:click = { () => switchPage('ContactUs') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 hover:bg-amber-400 hover:text-black hover:-translate-y-1 hover:scale-110 max-lg:ml-5 max-lg:hover:-translate-x-4 max-lg:hover:scale-100">{_contactUs}</div>
+		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
+			<div on:click = { () => switchPage('ContactUs') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_contactUs}</div>
 		</div>
-		<div class="flex-auto p-0 cursor-pointer hover:shadow-lg">
-			<div on:click = { () => switchPage('Admin') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 hover:bg-amber-400 hover:text-black hover:-translate-y-1 hover:scale-110 max-lg:ml-5 max-lg:hover:-translate-x-4 max-lg:hover:scale-100">{_admin}</div>
+		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
+			<div on:click = { () => switchPage('Admin') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_admin}</div>
 		</div>
 		
 	  </div>

@@ -1,30 +1,97 @@
 <script lang="ts">
-    import { feedbackStore } from './contactUsStore';
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
 
-    let contactData:any = [];
+    import { ContactStore } from "../Stores/ContactStore";
+    export let items:any = [];
 
-    let data:any = {
+    let dataC:any = {
         name: "",
         emailid: "",
-        contactNumber: ""
+        c_number: ""
     };
 
-    const unsubscribe = feedbackStore.subscribe(value => {contactData = value});
+    let errors = {
+        name: '',
+        emailid: "",
+        c_number: ""
+    };
 
-    let addData = () => {
-        const newData = {
-            name: data.name,
-            emailid: data.emailid,
-            contactNumber: data.contactNumber
+    
+    const unsubscribe = ContactStore.subscribe(value => {items = value});
+
+    let adddetails = () => {
+
+        let hasError = false;
+        const namePattern = /^[a-zA-Z]+$/;
+        const emailPattern =/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const contactNumberPattern = /^\d{10}$/;
+
+        if (!dataC.name) {
+            errors.name = 'This field is required';
+            hasError = true;
+        } else if (!namePattern.test(dataC.name)) {
+            errors.name = 'Name should contain only alphabets!!';
+            hasError = true;
+        } else {
+            errors.name = '';
+        }
+
+        if (!dataC.emailid) {
+            errors.emailid = 'This field is required';
+            hasError = true;
+        } else if (!emailPattern.test(dataC.emailid)) {
+            errors.emailid = 'Please enter a valid email id!!';
+            hasError = true;
+        } else {
+            errors.emailid = '';
+        }
+
+        if (!dataC.c_number) {
+            errors.c_number = 'This field is required';
+            hasError = true;
+        } else if (!contactNumberPattern.test(dataC.c_number)) {
+            errors.c_number = 'Contact number should be 10 digits!!';
+            hasError = true;
+        }
+        else {
+            errors.c_number = '';
+        }
+
+        if (hasError) {
+            return;
+        }
+
+        const newItem = {
+            name: dataC.name,
+            emailid: dataC.emailid,
+            c_number: dataC.c_number
         };
         
-        feedbackStore.createData(newData);
-        data = {
+        ContactStore.createData(newItem);
+        dataC = {
             name: "",
             emailid: "",
-            contactNumber: ""
+            c_number: ""
         };
+        alert('Thankyou for contacting us!!');
+        dispatch('submit', dataC);
     }
+
+// if (!dataC.c_number) {
+//     errors.c_number = 'Please enter a valid mobile number';
+//     hasError = true;
+// } else if (!contactNumberRegex.test(dataC.c_number)) {
+//     errors.c_number = 'Contact number should be 10 digits';
+//     hasError = true;
+// } else {
+//     errors.c_number = '';
+// }
+
+// if (hasError) {
+//     return;
+// }
+
 </script>
 
 
@@ -32,21 +99,36 @@
     <form action="" class="w-96 p-5 border-4 border-sky-400 rounded-2xl hover:border-amber-400 max-lg:w-2/4 max-lg:me-5 max-sm:w-full">
         <div class="my-5">
             <label for="name" class="block p-1 text-lg max-sm:text-base">Name</label>
-            <input bind:value={data.name} type="text" id="name" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter your full name" required />
+            <input bind:value={dataC.name} type="text" id="name" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter your full name" />
+            {#if errors.name}
+                <div id="name-error" class="py-1 text-red-800 text-xs">
+                    {errors.name}
+                </div>
+            {/if}
         </div>
 
         <div class="my-5">
-            <label for="name" class="block p-1 text-lg max-sm:text-base">Email-id</label>
-            <input bind:value={data.emailid} type="email" id="emailid" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter your email id" required />
+            <label for="emailid" class="block p-1 text-lg max-sm:text-base">Email-id</label>
+            <input bind:value={dataC.emailid} type="email" id="emailid" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter your email id" />
+            {#if errors.emailid}
+                <div id="email-error" class="py-1 text-red-800 text-xs">
+                    {errors.emailid}
+                </div>
+            {/if}
         </div>
 
         <div class="my-5">
-            <label for="name" class="block p-1 text-lg max-sm:text-base">Contact Number</label>
-            <input bind:value={data.contactNumber} type="number" id="contactNumber" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter your contact number" required />
+            <label for="c_number" class="block p-1 text-lg max-sm:text-base">Contact Number</label>
+            <input bind:value={dataC.c_number} type="number" id="c_number" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter your contact number" />
+            {#if errors.c_number}
+                <div id="c-error" class="py-1 text-red-800 text-xs">
+                    {errors.c_number}
+                </div>
+            {/if}
         </div>
 
         <div class="mt-7 flex">
-            <input on:click|preventDefault = {addData} class="w-full bg-sky-500 text-white font-bold me-1 py-2 px-4 rounded-lg transition duration-400 cursor-pointer hover:scale-105 hover:bg-amber-400 hover:text-black hover:shadow-xl max-sm:text-sm" type="submit" value="Submit">
+            <input  on:click|preventDefault = {adddetails} class="w-full bg-sky-500 text-white font-bold me-1 py-2 px-4 rounded-lg transition duration-400 cursor-pointer hover:scale-105 hover:bg-amber-400 hover:text-black hover:shadow-xl max-sm:text-sm" type="submit" value="Submit">
             <input class="w-full bg-sky-500 text-white font-bold ms-1 py-2 px-4 rounded-lg transition duration-400 cursor-pointer hover:scale-105 hover:bg-amber-400 hover:text-black hover:shadow-xl max-sm:text-sm" type="reset" value="Reset">
         </div>
     </form>
@@ -58,36 +140,12 @@
         
         <div class="flex-cols py-5">
             <p class="text-3xl font-semibold py-1 max-sm:text-lg">Reach out to us</p>
-            <p class="text-base py-1 max-sm:text-sm">Address Line - 1</p>
-            <p class="text-base py-1 max-sm:text-sm">Address Line - 2</p>
-            <p class="text-base py-1 max-sm:text-sm">Landmark, City</p>
-            <p class="text-base py-1 max-sm:text-sm">State - Zip</p>
+            <p class="text-base py-1 max-sm:text-sm">Located in: Binori B Square 1</p>
+            <p class="text-base py-1 max-sm:text-sm">Binori B Square 1, 801, 8th floor, BRTS road</p>
+            <p class="text-base py-1 max-sm:text-sm">Ambli Road, Ahmedabad</p>
+            <p class="text-base py-1 max-sm:text-sm">Gujarat - 380058</p>
 
         </div>
     </div>
-</div>
- 
-<!-- 
-    <div class="p-5 flex">
-        <div class="w-1/2">
-            
-        </div>
-        
-        <div class="p-5 w-1/2">
-            <div class="border-4 w-48 h-48 p-5">
-            </div>
-    
-            <div>
-                <p>Reach out to us</p>
-                <p>Address Line - 1</p>
-                <p>Address Line - 2</p>
-                <p>Landmark, City</p>
-                <p>State - Zip</p>
-    
-            </div>
-        </div>
-    </div> -->
-
-
-
+</div>  
   

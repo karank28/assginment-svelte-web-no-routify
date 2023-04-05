@@ -1,4 +1,9 @@
 <script lang="ts">
+    import { ContactStore } from "../Stores/ContactStore";
+
+    export let items:any = [];
+
+    const unsubscribe = ContactStore.subscribe(value => {items = value});
 
 </script>
 <div class="w-full p-6">
@@ -19,19 +24,19 @@
                 </tr>
             </thead>
             <tbody class="text-base max-sm:text-sm">
-                
+                {#each items as item}
                 <tr class="border-b border-gray-200">
                     <td class="px-6 py-4">
-                        <!-- {details.name} -->
+                        {item.name}
                     </td>
                     <td class="px-6 py-4">
-                        <!-- {details.emailid} -->
+                        {item.emailid}
                     </td>
                     <td class="px-6 py-4">
-                        <!-- {details.contactNumber} -->
+                        {item.c_number}
                     </td>
                 </tr>
-
+                {/each}
             </tbody>
         </table>
     </div>

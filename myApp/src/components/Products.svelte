@@ -5,20 +5,19 @@
     import { productsStore } from '../Stores/ProductStore';
 
     export let isOpen = false;
-    function closepopForm():void {
-        isOpen = false;
-        data = {
+    
+    function openpopForm(): void {
+      isOpen = true;
+    }
+    function closepopForm(): void {
+      isOpen = false;
+      data = {
             name: "",
             description: "",
             price: ""
         };
     }
-
-    // export let isDelete = false;
-    // function alertDelete():void{
-    //     isDelete = true;
-    // }
-
+    
     let products:any = [];
 
     interface Product {
@@ -43,11 +42,17 @@
 
     let addProduct = () => {
 
+        const productnamePattern = /(.*[a-z]){3}/i;
+
         let hasError = false;
         if (!data.name) {
             errors.name = 'This field is required';
             hasError = true;
-        } else {
+        } else if (!productnamePattern.test(data.name)){
+            errors.name = 'Name should atleast 3 alphabet characters!!';
+            hasError = true;
+        }  
+        else {
             errors.name = '';
         }
         if (!data.description) {
@@ -91,6 +96,7 @@
     let editProduct = newProduct => {
         isEdit = true;
         data = newProduct;
+        openpopForm();
     };
 
     let updateProduct = (): void => {
@@ -135,7 +141,7 @@
     
             <div class="my-3">
                 <label for="name" class="block p-1 text-lg max-sm:text-base">Price</label>
-                <input bind:value={data.price} type="number" id="name" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter product price"  />
+                <input bind:value={data.price} type="number" id="name" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter product price" maxlength="4" size="4"/>
                 {#if errors.price}
                     <div id="price-error" class="py-1 text-red-800 text-xs">
                         {errors.price}
@@ -209,26 +215,6 @@
 
                         </td>
                     </tr>
-                    <!-- {#if isDelete}
-                        <div class="fixed bottom-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex justify-center ">
-                            <div class="w-full mt-48 flex justify-center">
-                                
-                                <form action="" class="bg-white absolute w-96 p-5 border-4 border-sky-400 shadow-5xl rounded-2xl hover:border-amber-400">
-
-                                    <div class="my-5">
-                                        <label for="delete" class="block p-1 text-lg max-sm:text-base">Product Name</label>
-                                        <input type="text" id="del_product_name" class="w-full p-3 text-base outline outline-2 outline-gray-300 rounded-lg transition duration-400 hover:outline-amber-400 focus:outline-amber-400 hover:shadow-xl focus:shadow-xl max-sm:text-sm" placeholder="Enter product name" required />
-                                    </div>
-                            
-                                    <div class="mt-7 flex">
-                                        <input on:click={() => deleteProduct(newproduct.name)} class="w-full bg-sky-500 text-white font-bold me-1 py-2 px-4 rounded-lg transition duration-400 cursor-pointer hover:scale-105 hover:bg-amber-400 hover:text-black hover:shadow-xl max-sm:text-sm" type="submit" value="Delete">
-                                        <input on:click={() => isDelete = false} class="w-full bg-sky-500 text-white font-bold ms-1 py-2 px-4 rounded-lg transition duration-400 cursor-pointer hover:scale-105 hover:bg-amber-400 hover:text-black hover:shadow-xl max-sm:text-sm" type="reset" value="Cancel" />
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    {/if} -->
                 {/each}
             </tbody>
         </table>

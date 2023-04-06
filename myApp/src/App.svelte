@@ -8,11 +8,11 @@
 	import Admin from "./components/Admin.svelte";
 
 	let myApp:string ='Global Bazar';
-	let _home:string = 'Home';
-	let _products:string = 'Products';
-	let _aboutUs:string = 'About Us';
-	let _contactUs:string = 'Contact Us';
-	let _admin:string = 'Admin';
+	let tab_home:string = 'Home';
+	let tab_products:string = 'Products';
+	let tab_aboutUs:string = 'About Us';
+	let tab_contactUs:string = 'Contact Us';
+	let tab_admin:string = 'Admin';
 
 	// navigation 
 	let masterPage = 'Home';
@@ -21,7 +21,7 @@
     	masterPage = _masterPage;
   	}
 
-	//header
+	// header
 	let navbar = false;
 
 	function toggleNavbar(): void {
@@ -72,19 +72,19 @@
 	  <div class="w-full block lg:text-center flex-grow lg:flex lg:items-center lg:w-auto p-0" id="Menu">
 		
 		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
-			<div on:click = { () => switchPage('Home') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_home}</div>
+			<div on:click = { () => switchPage('Home') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{tab_home}</div>
 		</div>
 		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
-			<div on:click = { () => switchPage('Products') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_products}</div>
+			<div on:click = { () => switchPage('Products') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{tab_products}</div>
 		</div>
 		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
-			<div on:click = { () => switchPage('About') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_aboutUs}</div>
+			<div on:click = { () => switchPage('About') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{tab_aboutUs}</div>
 		</div>
 		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
-			<div on:click = { () => switchPage('ContactUs') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_contactUs}</div>
+			<div on:click = { () => switchPage('ContactUs') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{tab_contactUs}</div>
 		</div>
 		<div class="flex-auto p-0 cursor-pointer lg:hover:shadow-lg">
-			<div on:click = { () => switchPage('Admin') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{_admin}</div>
+			<div on:click = { () => switchPage('Admin') } class="w-full block lg:inline-block text-lg font-semibold text-white p-3 transition duration-400 lg:hover:bg-amber-400 hover:text-black max-lg:hover:text-amber-400 lg:hover:-translate-y-1 lg:hover:scale-110 max-lg:ml-5">{tab_admin}</div>
 		</div>
 		
 	  </div>
@@ -95,7 +95,7 @@
 <!-- Pages    -->
 <main>
 
-	{#if masterPage === 'Home'}
+	{#if masterPage == 'Home'}
   		<Home />
 	{:else if masterPage === 'Products'}
 		<Products />

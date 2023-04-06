@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { ContactStore } from "../Stores/ContactStore";
+    import { ContactUsStore } from "../Stores/ContactStore";
 
     export let items:any = [];
 
-    const unsubscribe = ContactStore.subscribe(value => {items = value});
+    const unsubscribe = ContactUsStore.subscribe(value => {items = value});
 
 </script>
 <div class="w-full p-6">

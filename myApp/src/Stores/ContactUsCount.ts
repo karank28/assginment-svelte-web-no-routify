@@ -1,7 +1,6 @@
 import { writable } from "svelte/store";
 import { ContactUsStore } from "../Stores/ContactStore";
 
-
 export const contactUs_countStore = (() => {
   const { subscribe, set, update } = writable(0);
 

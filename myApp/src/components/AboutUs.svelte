@@ -1,8 +1,32 @@
+<script lang="ts">
+    import { onMount } from 'svelte';
+    
+    const images = [
+      "./img/slide1.jpg",
+      "./img/slide2.jpg",
+    ];
+    
+    let currentIndex = 0;
+    const interval = 2000;
+    
+    function next() {
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+    
+    onMount(() => {
+      const intervalId = setInterval(() => {
+        next();
+      }, interval);
+      
+      return () => clearInterval(intervalId);
+    });
+  </script>
+
 <!-- svelte-ignore a11y-img-redundant-alt -->
 <div class="w-full">
     
     <div class="w-full relative text-center cursor-default drop-shadow-xl  ">
-        <img class="w-full opacity-150" src="./img/shop.jpg" alt="image description">
+        <img class="w-full opacity-150" src="{images[currentIndex]}" alt="image description">
     </div>
     
     <div class="text-center cursor-default">
@@ -16,3 +40,11 @@
         </div>
     </div>
 </div>
+
+
+  
+  <!-- <div class="w-full h-screen flex justify-center items-center">
+    <img src={images[currentIndex]} class="object-cover w-full h-full" />
+  </div> -->
+  
+  

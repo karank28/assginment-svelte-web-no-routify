@@ -4,6 +4,8 @@
 
     import { product_countStore } from "../Stores/ProductCount";
     import { contactUs_countStore } from "../Stores/ContactUsCount";
+    import { currentTab } from '../Stores/GlobalStore';
+    import { NavigationTab } from '../enum/navigationTabs';
 
     let product_count: number;
     product_countStore.subscribe((value) => (product_count = value));
@@ -11,20 +13,16 @@
     let contactUs_count: number;
     contactUs_countStore.subscribe((value) => (contactUs_count = value));
 
-    let showProducts = false;
-    let showContactUs = false;
-    
     function viewProducts() {
-        showProducts = true;
+        $currentTab = NavigationTab.Products
     }
 
     function viewContactus(){
-        showContactUs = true;
+        $currentTab = NavigationTab.ContactUs
     }
 
 </script>
 
-{#if !showProducts && !showContactUs}
 <div class="w-full p-6">
 
     <div class="flex justify-between text-center max-sm:flex-col max-sm:justify-center max-md:my-2 max-sm:my-0 max-sm:items-center">
@@ -58,9 +56,3 @@
     </div>
 
 </div>
-
-{:else if showProducts}
-    <Products />
-{:else if showContactUs}
-    <ContactUs />
-{/if}

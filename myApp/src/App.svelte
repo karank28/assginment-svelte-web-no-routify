@@ -1,4 +1,6 @@
 <script lang="ts">
+
+	
 	import Home from "./components/Home.svelte";
 	import Products from "./components/Products.svelte";
 	import AboutUs from "./components/AboutUs.svelte";
